@@ -1,0 +1,50 @@
+
+--Correcting Import Issues from Access: Nulls become Zeros
+update pt_skim2010 set tot_time = null where tot_time = 0;
+update pt_skim2010 set ivtt = null where tot_time is null;
+update pt_skim2010 set walk_tt = null where tot_time is null;
+update pt_skim2010 set wait_tt = null where tot_time is null;
+update pt_skim2010 set xferwt = null where tot_time is null;
+update pt_skim2010 set dist = null where tot_time is null;
+update pt_skim2010 set fares = null where tot_time is null;
+update pt_skim2010 set faremin = null where tot_time is null;
+update pt_skim2010 set noxfer = null where tot_time is null;
+update pt_skim2010 set distwalk = null where tot_time is null;
+
+update bus_skim2010 set tot_time = null where tot_time = 0;
+update bus_skim2010 set ivtt = null where tot_time is null;
+update bus_skim2010 set walk_tt = null where tot_time is null;
+update bus_skim2010 set wait_tt = null where tot_time is null;
+update bus_skim2010 set xferwt = null where tot_time is null;
+update bus_skim2010 set dist = null where tot_time is null;
+update bus_skim2010 set fares = null where tot_time is null;
+update bus_skim2010 set faremin = null where tot_time is null;
+update bus_skim2010 set noxfer = null where tot_time is null;
+update bus_skim2010 set distwalk = null where tot_time is null;
+
+update train_skim2010 set tot_tim = null where tot_tim = 0;
+update train_skim2010 set ivtt = null where tot_tim is null;
+update train_skim2010 set walk_tt = null where tot_tim is null;
+update train_skim2010 set wait_tt = null where tot_tim is null;
+update train_skim2010 set xfer_wt = null where tot_tim is null;
+update train_skim2010 set dist = null where tot_tim is null;
+update train_skim2010 set fares = null where tot_tim is null;
+update train_skim2010 set faremin = null where tot_tim is null;
+update train_skim2010 set noxfer = null where tot_tim is null;
+update train_skim2010 set distwalk = null where tot_tim is null;
+
+
+update place_oda as a
+set 
+tr_tot_tt = b.tot_tim,
+tr_ivtt = b.ivtt,
+tr_walk_tt = b.walk_tt,
+tr_wait_tt = b.wait_tt,
+tr_xfer_wt = b.xfer_wt,
+tr_dist = b.dist,
+tr_fares = b.fares,
+tt_faremin = b.faremin,
+tr_noxfer = b.noxfer,
+tr_distwalk = b.distwalk
+from train_skim2010 as b
+where a.o_taz::smallint  = b.origin and a.d_taz::smallint  = b.dest

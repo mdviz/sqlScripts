@@ -1,0 +1,143 @@
+﻿-- select * from place_oda 
+-- where sampn = 2000017 and perno = 3
+-- order by plano
+
+-- select sampn, perno, plano, trpdur1, trpdur2,trpdur3,trpdur4,trpdur5, greatest(trpdur1, trpdur2,trpdur3,trpdur4,trpdur5)
+-- from processed8_tripdur 
+-- 
+-- select a.sampn, a.perno, a.new_plano, a.plano, b.plano, a.or_tpurp, a.d_tpurp, a.mode, a.cmode1, a.cmode2, a.cmode3, a.cmode4, b.trpdur, b.trpdur1, b.trpdur2, b.trpdur3, b.trpdur4
+-- from place_oda a, processed8_tripdur b
+-- where a.sampn = b.sampn and a.perno = b.perno and a.plano = b.plano
+-- order by a.sampn, a.perno,a.plano
+-- 
+-- select column_name
+-- from information_schema.columns
+-- where table_schema = 'public' and table_name = 'place_oda'
+-- 
+
+-- drop view output_test1 ;
+-- create table output_testA as
+-- select 
+-- a.sampn, 
+-- a.perno, 
+-- a.plano, 
+-- a.new_plano, 
+-- a.tpurp, 
+-- a.or_tpurp,
+-- o_purp91, 
+-- a.d_tpurp, 
+-- a.o_desc91,
+-- a.d_desc91,
+-- gen_purp,
+-- b.hhsiz,
+-- b.hhveh,
+-- b.hisp,
+-- b.resty,
+-- b.own,
+-- b.income,
+-- case
+-- when (b.income = 1) then 7500
+-- when (b.income = 2) then 20000
+-- when (b.income = 3) then 30000
+-- when (b.income = 4) then 42500
+-- when (b.income = 5) then 62500
+-- when (b.income = 6) then 87500
+-- when (b.income = 7) then 125000
+-- when (b.income = 8) then 175000
+-- when (b.income = 99) then -1
+-- end mp_income,
+-- b.hhlic,
+-- b.hhwrk,
+-- CASE when b.hhwrk = 0 then 0 else b.hhveh/b.hhwrk end vehpwrk,
+-- b.hhveh/b.hhsiz vehpper,
+-- b.hhwrk/b.hhsiz wrkpper,
+-- a.trpdur,
+-- a.actdur,
+-- a.city,
+-- a.state,
+-- a.zip,
+-- a.town_id,
+-- a.town,
+-- a.cmode1,
+-- a.cmode2,
+-- a.cmode3,
+-- a.cmode4,
+-- a.cmode5,
+-- a.cmode6,
+-- a.cmode7,
+-- a.cmode8,
+-- a.cmode9,
+-- auto_am_tt,
+-- auto_dist,
+-- pt_tot_tt,
+-- pt_ivtt,
+-- pt_walk_tt,
+-- pt_wait_tt,
+-- pt_xfer_wt,
+-- pt_dist,
+-- pt_fares,
+-- pt_faremin,
+-- pt_noxfer,
+-- pt_distwalk,
+-- tr_tot_tt,
+-- tr_ivtt,
+-- tr_walk_tt,
+-- tr_wait_tt,
+-- tr_xfer_wt,
+-- tr_dist,
+-- tr_fares,
+-- tr_faremin,
+-- tr_noxfer,
+-- tr_distwalk,
+-- bus_tot_tt,
+-- bus_ivtt,
+-- bus_walk_tt,
+-- bus_wait_tt,
+-- bus_xfer_wt,
+-- bus_dist,
+-- bus_fares,
+-- bus_faremin,
+-- bus_noxfer,
+-- bus_distwalk,
+-- bus_av,
+-- train_av,
+-- pt_av,
+-- d_geoid,
+-- o_geoid,
+-- d_taz,
+-- o_taz,
+-- hh_geoid,
+-- hh_taz,
+-- choice, 
+-- captive
+-- from place_oda a, hh b
+-- where a.sampn = b.sampn and
+-- o_taz is not null and d_taz is not null and hh_taz is not null
+-- and o_taz <> d_taz;
+
+
+--Create Table to Process Multiple Modes
+-- drop table mode_test;
+-- create table mode_test as
+-- select 
+-- a.sampn, 
+-- a.perno, 
+-- a.plano, 
+-- a.new_plano,
+-- a.cmode1,
+-- a.cmode2,
+-- a.cmode3,
+-- a.cmode4,
+-- a.cmode5,
+-- a.cmode6,
+-- a.cmode7,
+-- a.cmode8,
+-- a.cmode9 
+-- from place_oda a where cmode2 > 0
+-- order by a.sampn, a.perno, a.plano
+-- limit 10000
+-- 
+-- update place_oda set mp_income = 
+
+-- COPY place_oda TO 'C:\Users\mdo\Desktop\RA\place_081914.csv' DELIMITER ',' CSV HEADER;
+
